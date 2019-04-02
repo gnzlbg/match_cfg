@@ -81,28 +81,34 @@ macro_rules! match_cfg {
 #[cfg(test)]
 mod tests {
     match_cfg! {
-        #[cfg(unix)] => { fn f0_() -> bool { true }}
+        #[cfg(target_pointer_width = "64")] => { fn f0_() -> bool { true }}
     }
     match_cfg! {
         #[cfg(unix)] => { fn f1_() -> bool { true }}
-        #[cfg(target_os = "macos")] => { fn f1_() -> bool { false }}
+        #[cfg(any(target_os = "macos", target_os = "linux"))] => { fn f1_() -> bool { false }}
     }
 
     match_cfg! {
-        #[cfg(target_os = "cloudabi")] => { fn f2_() -> bool { false }}
-        #[cfg(target_os = "macos")] => { fn f2_() -> bool { true }}
+        #[cfg(target_pointer_width = "64")] => { fn f2_() -> bool { true }}
+        #[cfg(target_pointer_width = "32")] => { fn f2_() -> bool { false }}
     }
 
     match_cfg! {
-        #[cfg(target_os = "linux")] => { fn f3_() -> i32 { 0 }}
-        #[cfg(target_os = "windows")] => { fn f3_() -> i32 { 1 }}
+        #[cfg(target_pointer_width = "8")] => { fn f3_() -> i32 { 0 }}
+        #[cfg(target_pointer_width = "16")] => { fn f3_() -> i32 { 1 }}
         _ => { fn f3_() -> i32 { 2 }}
     }
 
     #[test]
     fn tests() {
-        assert!(f0_());
-        assert!(f1_());
+        #[cfg(target_pointer_width = "64")]
+        {
+            assert!(f0_());
+        }
+        #[cfg(unix)]
+        {
+            assert!(f1_());
+        }
         assert!(f2_());
         assert_eq!(f3_(), 2);
     }
