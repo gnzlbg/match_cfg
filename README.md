@@ -1,5 +1,4 @@
 # match_cfg
-===
 
 [![Build Status](https://travis-ci.com/gnzlbg/match_cfg.svg?branch=master)](https://travis-ci.com/gnzlbg/match_cfg)
 
