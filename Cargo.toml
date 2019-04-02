@@ -1,0 +1,22 @@
+[package]
+name = "match_cfg"
+version = "0.1.0"
+authors = ["gnzlbg <gonzalobg88@gmail.com>"]
+edition = "2015"
+license = "MIT/Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/gnzlbg/match_cfg"
+homepage = "https://github.com/gnzlbg/match_cfg"
+documentation = "https://docs.rs/match_cfg"
+description = """
+A convenience macro to ergonomically define an item depending on a large number
+of `#[cfg]` parameters. Structured like match statement, the first matching
+branch is the item that gets emitted.
+"""
+
+[badges]
+travis-ci = { repository = "gnzlbg/match_cfg" }
+
+[features]
+default = ["use_core"]
+use_core = []
