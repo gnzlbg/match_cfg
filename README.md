@@ -4,6 +4,8 @@
 
 [Documentation](https://docs.rs/match_cfg)
 
+**Minimum Supported Rust Version**: 1.13.0.
+
 A convenience macro to ergonomically define an item depending on a large number
 of `#[cfg]` parameters. Structured like match statement, the first matching
 branch is the item that gets emitted.
